@@ -29,6 +29,12 @@
           nav
           dense
         >
+        <v-list-item link to="/pie-chart-view" >
+            <v-list-item-icon>
+              <v-icon>mdi-account-multiple</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Main Page</v-list-item-title>
+          </v-list-item>
          
           <v-list-item link to="/import-data" >
             <v-list-item-icon>
@@ -106,12 +112,6 @@
   <!-- <v-footer app> -->
     <!-- // vue2 -< --> 
   <!-- </v-footer> -->
-
-  <PieCharts @point-click="point = $event.point"/>
-  <br><br>
-    <PieChartsa @point-click="point1 = $event.point1"/>
-    <br><br>
-    <PieChartsb />
  </v-app>
 
   
@@ -120,36 +120,34 @@
 
 
 </template>
-
 <script>
 
-import PieCharts from "./components/PieCharts";
-import PieChartsa from "./components/PieChartsa";
-import PieChartsb from "./components/PieChartsb";
-  export default {
-    name : 'App',
+export default {
+  name : 'App',
     components : {
-      PieCharts,PieChartsa,PieChartsb
+      
     },
-    data () {
+  data () {
       return {
         drawer : false
       }
     },
-    methods : {
-      drawerChange () {
+  methods : { 
+    drawerChange () {
         console.log(this.drawer, !this.drawer)
         this.drawer = !this.drawer
       }
-    }
+
   }
+}
 </script>
+
 <style>    
 #app {    
   font-family: Avenir, Helvetica, Arial, sans-serif;    
   -webkit-font-smoothing: antialiased;    
   -moz-osx-font-smoothing: grayscale;    
-  text-align: center;    
+  text-align: center;   
   color: #2c3e50;    
   margin-top: 10px;    
 }    

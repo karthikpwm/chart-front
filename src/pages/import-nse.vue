@@ -1,5 +1,6 @@
 <template>
-
+<div>
+  <h1> Import NSE Data excel  </h1><br>
   <div class="text-center">
     <input type="file" ref="file" @change="onChange($event)">
     
@@ -21,13 +22,14 @@
     </v-btn>
     
     </div>
+</div>
 </template>
 
 
 
 <script>
 
-import XLSX from "xlsx"
+import * as XLSX from 'xlsx';
 import axios from "axios";
 import {URL} from './../helper/consts'
 

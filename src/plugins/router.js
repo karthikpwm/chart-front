@@ -5,29 +5,34 @@ Vue.use(VueRouter)
 
 const routes = [
  
- 
+  {
+    path: '',
+    name: 'App',
+    component : () => import( '../pages/pie-chart-view.vue')
+  },
   {
     path: '/import-nse',
     name: 'App',
     component : () => import( '../pages/import-nse.vue')
   },
-  {
-    path: '',
-    name: 'App',
-    component : () => import( '../pages/import-nse.vue')
-  },
+  
   {
     path: '/import-data',
     name: 'App',
     component : () => import( '../pages/import-data.vue')
   },
   {
+    path: '/pie-chart-view',
+    name: 'App',
+    component : () => import( '../pages/pie-chart-view.vue')
+  },
+  {
     path : '',
-    redirect : '/app.vue'
+    redirect : '/pie-chart-view.vue'
   },
   {
     path : '*',
-    redirect : '/app.vue'
+    redirect : '/pie-chart-view.vue'
   },
 ]
 

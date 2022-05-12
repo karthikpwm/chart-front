@@ -35,7 +35,7 @@ export default {
             }
           },
           title: {
-          text: 'Sectorwise Holding'
+          text: 'Sectorwise Holding',
              },
              tooltip: {
           pointFormat: "{series.name}: <b>{point.percentage:.2f}%</b>",
@@ -43,8 +43,8 @@ export default {
              
           plotOptions: {
             pie: {
-              innerSize: 100,
-              depth: 4,
+              innerSize: 20,
+              depth: 45,
               dataLabels: {
               enabled: true,
               format: "<b>{point.name}</b>: {point.percentage:.2f} %",

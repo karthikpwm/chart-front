@@ -1,5 +1,8 @@
 <template>
-
+ <div><br><br><br> Import the Excel file of Stock quantity here.<br>
+ <br>
+ <br>
+ <br>
   <div class="text-center">
     <input type="file" ref="file" @change="onChange($event)">
     
@@ -21,34 +24,29 @@
     </v-btn>
     
     </div>
+
+    </div>
 </template>
 
 
 
 <script>
 
-import XLSX from "xlsx"
+import * as XLSX from 'xlsx';
 import axios from "axios";
 import {URL} from './../helper/consts'
 
   export default {
-
+  
     async mounted () {
       
-    //await this.onUploadFile();
-    
-    //this.timer = setInterval(this.fetchData, 300000);
-    // this.showLocaleTime();
-    
 
     },
 
-    methods: {
+   methods: {
       onChange(event) {
         //console.log('hiiii')
         //console.log('ooooo',this.file)
-        
-       
 
       this.file = event.target.files ? event.target.files[0] : null;
       if (this.file) {
@@ -72,7 +70,7 @@ import {URL} from './../helper/consts'
           console.log('pppppp',data)
 
           //this.data = data;
-}
+        }
       reader.readAsBinaryString(this.file);
       }
       //console.log('tooo')
@@ -85,9 +83,9 @@ import {URL} from './../helper/consts'
         .then(res => {
           console.log(res);
         })
-        // .catch(err => {
-        //   console.log(err);
-        // });
+        .catch(err => {
+          console.log(err);
+        });
 
        window.location.reload();
     },
