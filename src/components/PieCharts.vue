@@ -68,6 +68,7 @@ export default {
   },
   methods: {
      async fetchdata () {
+       console.log(URL)
      await axios
      .get(`${URL}analytic/sector`)
       .then(async(res) =>{
