@@ -75,10 +75,11 @@ export default {
         // handle success
         //console.log('yhh',res.data);
         let resData = res.data.data;
-        console.log('tttt',resData)
+        //console.log('tttt',resData)
 
         resData.forEach(val => {
           // console.log('pppp',element.prevclose,element.quantity)
+          val.prevclose = val.prevclose || 1
           let ab = val.prevclose * val.quantity;
           val.userholding = ab
           // this.userholding = ab

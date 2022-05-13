@@ -89,7 +89,9 @@ export default {
 
         resData.forEach(val => {
           // console.log('pppp',element.prevclose,element.quantity)
-          let ab = val.prevclose * val.quantity;
+          
+          val.prevclose = val.prevclose || 1
+          let ab = val.prevclose * val.quantity ;
           val.userholding = ab
           // this.userholding = ab
           //console.log(userholding) 
