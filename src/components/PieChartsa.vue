@@ -46,7 +46,7 @@ export default {
           },
         },
         title: {
-          text: "Stockwise Holding",
+          text: "",
         },
         tooltip: {
           pointFormat: "{series.name}: <b>{point.percentage:.2f}%</b>",
@@ -56,9 +56,14 @@ export default {
             innerSize: 20,
             depth: 45,
             dataLabels: {
+              alignTo: 'connectors',
               enabled: true,
               format: "<b>{point.name}</b>: {point.percentage:.2f} %",
             },
+            dataSorting: {
+      enabled: true,
+      sortKey: 'y'
+    },
           },
           series: {
             cursor: "pointer",
@@ -72,7 +77,14 @@ export default {
             },
           },
         },
-        series: [],
+        series: [{
+          dataSorting: {
+      enabled: true,
+      sortKey: 'y'
+    },
+        }
+          
+        ],
       },
     };
   },
@@ -90,7 +102,7 @@ export default {
         resData.forEach(val => {
           // console.log('pppp',element.prevclose,element.quantity)
           
-          val.prevclose = val.prevclose || 1
+          val.prevclose = val.close || 1
           let ab = val.prevclose * val.quantity ;
           val.userholding = ab
           // this.userholding = ab
@@ -113,7 +125,7 @@ export default {
            val.per = qw.toFixed(2);
        })
          
-      // console.log(resData)
+       console.log(resdata)
          
         //this.sum = sum;
           //console.log('mmm',sum)
@@ -131,13 +143,50 @@ export default {
     },
 
     setStock() {
-      let perData = [];
-      this.data.forEach((x) => {
-        perData.push([x.stock_name, parseFloat(x.per) || 0]);
+      // let perData = [];
+      // this.data.forEach((x) => {
+      //   perData.push([x.stock_name, parseFloat(x.per) || 0]);
+      // });
+
+      
+       let labels123 = [];
+     let data123 = [] 
+      this.data.forEach(element => {
+        
+       let ab = element.stock_name
+        labels123.push(ab)
+        let bdc = element.per
+        data123.push(bdc)
+      })
+      let labels = labels123;
+      let data1 = data123;
+       //console.log('ssss',labels)
+       //console.log('tttt',data1)
+
+       const allData = [];
+for (let i = 0; i < labels.length; ++i) {
+    allData.push({
+        label: labels[i],
+        data: data1[i]
+    });
+}
+  allData.sort((a, b) => b.data - a.data);
+     const sortedLabels = allData.map(e => e.label);
+ const sortedData = allData.map(e => e.data);
+
+ console.log(sortedLabels);   
+console.log(sortedData); 
+//console.log('all',allData)    
+
+let perData = [];
+      allData.forEach((x) => {
+        perData.push([x.label, parseFloat(x.data) || 0]);
       });
+
+
       let lineCharts = this.$refs.pieChart;
       lineCharts.delegateMethod("showLoading", "Loading...");
-   
+       //console.log(perData)
       lineCharts.removeSeries();
       lineCharts.addSeries({
         name: "Stock wise",

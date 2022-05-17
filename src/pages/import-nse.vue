@@ -55,7 +55,7 @@ import {URL} from './../helper/consts'
       this.file = event.target.files ? event.target.files[0] : null;
       if (this.file) {
         const reader = new FileReader();
-        console.log('hgnjjyh',this.file)
+        //console.log('hgnjjyh',this.file)
         reader.onload = (e) => {
           /* Parse data */
           const bstr = e.target.result;
@@ -71,7 +71,7 @@ import {URL} from './../helper/consts'
           
 
           this.excelData = data;
-          console.log('pppppp',data)
+          //console.log('pppppp',data)
         //  data.map((item) => {
         //   this.itemsList.push(item.XLSX);
         // });

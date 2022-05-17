@@ -1,10 +1,13 @@
 <template>
   <div>
-    
+    <h2>SECTORWISE HOLDING </h2>
+    <br>
   <PieCharts @point-click="point = $event.point"/>
-  <br><br>
+  <br>
+  <br><h2>STOCKWISE HOLDING</h2><br>
     <PieChartsa @point-click="point1 = $event.point1"/>
-    <br><br>
+    <br><br><h2>INDUSTRYWISE HOLDING</h2>
+    
     <PieChartsb />
 
   </div>

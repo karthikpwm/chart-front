@@ -65,6 +65,12 @@
 
       <v-spacer></v-spacer>
 
+      <v-btn icon>
+        <v-list-item href="https://powerful-ocean-07917.herokuapp.com/" target="_blank">LIVE DATA</v-list-item>
+        <v-icon>mdi-heart</v-icon>
+        
+      </v-btn>
+
       <!-- <v-btn icon>
         <v-icon>mdi-heart</v-icon>
       </v-btn>

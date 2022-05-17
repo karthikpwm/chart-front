@@ -35,7 +35,7 @@ export default {
             }
           },
           title: {
-          text: 'Industrywise Holding'
+          text: ''
              },
              tooltip: {
           pointFormat: "{series.name}: <b>{point.percentage:.2f}%</b>",
@@ -78,7 +78,7 @@ export default {
 
         resData.forEach(val => {
           // console.log('pppp',element.prevclose,element.quantity)
-          val.prevclose = val.prevclose || 1
+          val.prevclose = val.close || 1
           let ab = val.prevclose * val.quantity;
           val.userholding = ab
           // this.userholding = ab
@@ -121,7 +121,7 @@ const formattedData = resdata.reduce((previousValue, { industry, per }) => {
     return previousValue;
 }, {});
 
-console.log('haaaaai',Object.values(formattedData));
+//console.log('haaaaai',Object.values(formattedData));
 
      this.data = Object.values(formattedData);
      this.setStock();
@@ -130,10 +130,46 @@ console.log('haaaaai',Object.values(formattedData));
     },
 
     setStock() {
-      let perData = [];
-      this.data.forEach((x) => {
-        perData.push([x.industry, parseFloat(x.perc) || 0]);
+      // let perData = [];
+      // this.data.forEach((x) => {
+      //   perData.push([x.industry, parseFloat(x.perc) || 0]);
+      // });
+
+      
+       let labels123 = [];
+     let data123 = [] 
+      this.data.forEach(element => {
+        
+       let ab = element.industry
+        labels123.push(ab)
+        let bdc = element.perc
+        data123.push(bdc)
+      })
+      let labels = labels123;
+      let data1 = data123;
+       //console.log('ssss',labels)
+       //console.log('tttt',data1)
+
+       const allData = [];
+for (let i = 0; i < labels.length; ++i) {
+    allData.push({
+        label: labels[i],
+        data: data1[i]
+    });
+}
+  allData.sort((a, b) => b.data - a.data);
+     const sortedLabels = allData.map(e => e.label);
+ const sortedData = allData.map(e => e.data);
+
+ console.log(sortedLabels);   
+console.log(sortedData); 
+//console.log('all',allData)    
+
+let perData = [];
+      allData.forEach((x) => {
+        perData.push([x.label, parseFloat(x.data) || 0]);
       });
+
       let lineCharts = this.$refs.pieChart;
       lineCharts.delegateMethod("showLoading", "Loading...");
    
