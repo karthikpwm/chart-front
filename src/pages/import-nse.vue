@@ -36,6 +36,8 @@ import {URL} from './../helper/consts'
   export default {
 
     async mounted () {
+
+      //this.fetchdata()
       
     //await this.onUploadFile();
     
@@ -69,9 +71,19 @@ import {URL} from './../helper/consts'
           /* Convert array of arrays */
           const data = XLSX.utils.sheet_to_json(ws, {  skipHeader: true });
           
-
+         
           this.excelData = data;
+          
           //console.log('pppppp',data)
+          // data.forEach(val => {
+          //   let zx = val.CLOSE - val.PREVCLOSE;
+          //   let cv = (zx / val.PREVCLOSE * 100).toFixed(2);
+          //   val.diff = cv
+          //   console.log('diffff',val.diff)
+          // })
+         
+         
+
         //  data.map((item) => {
         //   this.itemsList.push(item.XLSX);
         // });
@@ -95,68 +107,26 @@ import {URL} from './../helper/consts'
       //console.log('tooo')
       },
 
+      // async fetchdata () {
+           
+      //      await axios .get(`${URL}analytic/fetchmarket`,
+      //      )
+      //      .then (async (res) => {
+             
+      //        let resdata = res.data.data
+      //        console.log(resdata)
+             
+             
+      //        resdata.forEach(val => {
+      //          let pi = val.capvalue;
+      //          console.log('pocccc',pi)
+      //        })
+      //      })
+
+            
+      //    },
+
       onUploadFile() {
-      // const formData = new FormData();
-      // formData.append("file", this.file);  // appending file
-
-     // sending file to the backend
-//        axios
-//       .get(`${URL}analytic`)     
-//       .then( async (res) => {
-//         //console.log(res.data)
-//         let resData = res.data.data;
-// resData.forEach(element => {
-//   let en = element.name.slice(0, 6)
-//   console.log(element.portfolio_id,en)
-//   //console.log('hiiii',{excelData : this.excelData} ) 
-//      //console.log('asfdfdsfds'.slice(1,4))
-    
-//      let exdata = this.excelData;
-// exdata.forEach(val => {
-//   let vn = val.name.slice(0,6)
-
-// let wn = val.weightage
-// let eportid = val.portfolio_id
-// console.log(val.portfolio_id,vn,wn,eportid)
-//   // if(element.portfolio_id == excelData. && element.name == excelData.name)
-//   // {
-//   //    console.log('pppp')
-//   // }
-
-
-// // let valp = this.eportid ;
-// //   let excname = this.vn;
-// //   let excweight = this.wn;
-
-//    console.log('ooooo',element.portfolio_id,val.portfolio_id,en,vn)
-//     if(element.portfolio_id == val.portfolio_id && en == vn) {
-//       console.log('jojojo',val.portfolio_id,vn)
-//       axios.put(`${URL}analytic/${element.analytic_id}`,{
-//            name : val.name,
-//            weightage : val.weightage,
-//            symbol : val.symbol
- 
-//            })
-          
-//     }
-//      else{
-//        axios.post(`${URL}analytic/upexcel`, {
-//          portfolio_id :element.portfolio_id,
-//             name : element.name,
-//             weightage : element.weightage,
-//             symbol : element.symbol
-
-//       })
-//     }
-
-// });
- 
-// })
-
-
-     
-      
-//       })  
       
       axios.post(`${URL}analytic/uploadnse`, 
       { excelData : this.excelData 
@@ -167,6 +137,17 @@ import {URL} from './../helper/consts'
         .catch(err => {
           console.log(err);
         });
+
+        // axios.post(`${URL}analytic/updatemarket`,
+        // { excelData : this.excelData
+
+        // })
+        // .then(res => {
+        //   console.log(res);
+        // })    
+        // .catch(err => {
+        //   console.log(err);
+        // });
     },
      
      

@@ -38,7 +38,7 @@ export default {
           text: '',
              },
              tooltip: {
-          pointFormat: "{series.name}: <b>{point.percentage:.2f}%</b>",
+          pointFormat: "{point.name}: <b>{point.y}</b>",
         },
              
           plotOptions: {
@@ -48,29 +48,20 @@ export default {
               
               dataLabels: {
                 alignTo: 'plotEdges',
-                
               enabled: true,
               format: "<b>{point.name}</b>: {point.percentage:.2f} %",
             },
             },
             series: {
               cursor: 'pointer',
-               colors: ['#ffb3ff', '#b3ffb3', '#b3d9ff', '#ffccb3', '#ffff99', '#ffb3d9', '#e0b3ff', '#00e6e6', '#a6a6a6','#661aff','#d2ff4d','#ffdd99','#c2c2a3',
-               '#df9fbf','#ff9999','#80ffdf','#666699','#ffb84d','#b3b3b3','#ff6666','#5A7247','#E94B3C','#DBB1CD','#FF6F61','#00539C','#FFD662','#8D9440','#00A591','#BFD641','#ffcc5c'
-              ],
               allowPointSelect: true,
               dataSorting: {
             enabled: true
         },
               
-              point: {
-                events: {
-                  click: ({point}) => {
-                    this.showOverlay = !this.showOverlay;
-                    this.$emit('point-click', {point});
-                  }
-                }
-              }
+              colors: ['#ffb3ff', '#b3ffb3', '#b3d9ff', '#ffccb3', '#ffff99', '#ffb3d9', '#e0b3ff', '#00e6e6', '#a6a6a6','#661aff','#d2ff4d','#ffdd99','#c2c2a3',
+               '#df9fbf','#ff9999','#80ffdf','#666699','#ffb84d','#b3b3b3','#ff6666','#5A7247','#E94B3C','#DBB1CD','#FF6F61','#00539C','#FFD662','#8D9440','#00A591','#BFD641','#ffcc5c'
+              ],
             }
           },
           series: [{
@@ -83,12 +74,12 @@ export default {
      async fetchdata () {
        //console.log(URL)
      await axios
-     .get(`${URL}analytic/sector`)
+     .get(`${URL}analytic/market`)
       .then(async(res) =>{
         // handle success
         //console.log('yhh',res.data);
         let resData = res.data.data;
-        //console.log('tttt',resData)
+        console.log('tttt',resData)
 
         resData.forEach(val => {
           // console.log('pppp',element.prevclose,element.quantity)
@@ -155,11 +146,11 @@ export default {
 // console.log(sortedLabels);   // ["B", "A", "D", "C"] 
 // console.log(sortedData);     // [1, 3, 5, 10] 
 
-const formattedData = resdata.reduce((previousValue, { sector, per }) => {
-    if (!previousValue[sector]) {
-        previousValue[sector] = { sector, perc: 0 };
+const formattedData = resdata.reduce((previousValue, { marketcap, nomarketcap }) => {
+    if (!previousValue[marketcap]) {
+        previousValue[marketcap] = { marketcap, perc: 0 };
     }
-    previousValue[sector].perc += +per;
+    previousValue[marketcap].perc += +nomarketcap;
     return previousValue;
 }, {});
 
@@ -187,6 +178,18 @@ const formattedData = resdata.reduce((previousValue, { sector, per }) => {
 
     },
 
+    stockinsert() {
+
+      axios.post(`${URL}analytic/markinsert`, { excelData : this.resData })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+
+    },
+
     setStock() {
       // let perData = [];
       // this.data.forEach((x) => {
@@ -197,7 +200,7 @@ const formattedData = resdata.reduce((previousValue, { sector, per }) => {
      let data123 = [] 
       this.data.forEach(element => {
         
-       let ab = element.sector
+       let ab = element.marketcap
         labels123.push(ab)
         let bdc = element.perc
         data123.push(bdc)
@@ -236,8 +239,7 @@ let perData = [];
       lineCharts.removeSeries();
       lineCharts.addSeries({
         name: "Sector wise",
-        data: perData,
-        color :  'Black',
+        data: perData
       });
       lineCharts.hideLoading();
     },

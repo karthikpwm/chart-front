@@ -67,14 +67,10 @@ export default {
           },
           series: {
             cursor: "pointer",
-            point1: {
-              events: {
-                click: ({ point1 }) => {
-                  this.showOverlay = !this.showOverlay;
-                  this.$emit("point-click", { point1 });
-                },
-              },
-            },
+            allowPointSelect: true,
+            colors: ['#ffb3ff', '#b3ffb3', '#b3d9ff', '#ffccb3', '#ffff99', '#ffb3d9', '#e0b3ff', '#00e6e6', '#a6a6a6','#661aff','#d2ff4d','#ffdd99','#c2c2a3',
+               '#df9fbf','#ff9999','#80ffdf','#666699','#ffb84d','#b3b3b3','#ff6666','#5A7247','#E94B3C','#DBB1CD','#FF6F61','#00539C','#FFD662','#8D9440','#00A591','#BFD641','#ffcc5c'
+              ],
           },
         },
         series: [{
